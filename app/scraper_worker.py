@@ -80,7 +80,17 @@ def scrape(query: str, city: str, state: str, country: str) -> list[dict]:
     print(f"URL: {url}", file=sys.stderr)
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+        # Argumentos extras necessários para rodar em containers Docker
+        browser = p.chromium.launch(
+            headless=HEADLESS,
+            args=[
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',  # Evita problemas de memória compartilhada em containers
+                '--disable-gpu',
+                '--disable-software-rasterizer'
+            ]
+        )
         
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",

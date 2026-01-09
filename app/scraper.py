@@ -18,7 +18,7 @@ async def scrape_google_maps(input: SearchInput) -> list[Lead]:
             [sys.executable, worker_script, input.query, input.city, input.state, input.country],
             capture_output=True,
             text=True,
-            timeout=180,  # 3 minute timeout
+            timeout=300,  # 5 minute timeout (containers podem demorar mais)
             cwd=os.path.dirname(script_dir)
         )
         

@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+
+# Test files
+test_*.bat
+test_*.json
+
+# Env files (segredos não devem entrar no container - use Docker secrets ou env vars)
+.env
+
+# Docs
+README.md
