@@ -1,9 +1,13 @@
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Security, Depends
 from fastapi.security import APIKeyHeader
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 from app.models import SearchInput, Lead
 from app.scraper import scrape_google_maps
+
+# Load environment variables from .env file
+load_dotenv()
 
 # API Key configuration
 API_KEY = os.getenv("API_KEY", "")
