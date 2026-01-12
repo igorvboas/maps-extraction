@@ -221,14 +221,16 @@ def scrape(query: str, city: str, state: str, country: str) -> list[dict]:
                             print(f"[LOG] ✓ Lead adicionado: {name[:40]} | Tel: {phone or 'N/A'} | Total: {len(leads_data)}", file=sys.stderr)
                         else:
                             print(f"[LOG] ✗ Ignorado (fora da localização): {name[:40]}", file=sys.stderr)
-                        # If no address, include anyway but it might be filtered later
+                    else:
+                        # If no address available, include anyway (can't filter by location)
                         leads_data.append({
                             "name": name,
                             "category": category,
                             "phone": phone,
-                            "address": address,
+                            "address": None,
                             "url": None
                         })
+                        print(f"[LOG] ⚠ Lead sem endereço: {name[:40]} | Tel: {phone or 'N/A'}", file=sys.stderr)
                     
                 except Exception as e:
                     print(f"Error on card {i}: {e}", file=sys.stderr)
